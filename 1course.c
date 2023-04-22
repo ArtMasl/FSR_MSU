@@ -105,6 +105,8 @@ int main() {
 
     char * filename = "A_ver3.png";
     int w, h;
+    int r, g, b, a;
+    int r1, g1, b1, a1;
     char * picture = loadPng(filename, &w, &h);
     if (picture == NULL){
         printf("I can not read the picture from the file %s. Error.\n", filename);
@@ -119,8 +121,6 @@ int main() {
 
     for (int i = 1; i < w-1; i++){
         for (int j = 1; j < h-1; j++){
-            int r, g, b, a;
-            int r1, g1, b1, a1;
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
             set_pixel(i, j, 0, 0, b, 0, picture, w);
         }
