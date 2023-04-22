@@ -1,11 +1,12 @@
 #include "lodepng.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 
 char* loadPng(const char* filename, int* width, int* height) {
   
   unsigned char* image = NULL;
-  unsigned int width, height;
 
   int error = lodepng_decode32_file(&image, width, height, filename);
   if(error) 
@@ -44,48 +45,48 @@ void get_pixel(int x, int y, int *r, int *g, int *b, int *a, char* image, int wi
    return;
 }
 
-bool is_close(int r1, r2, g1, g2, b1, b2) {
+int is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
     int e_r = 10;
-    return fabs(r1 - r2) < e_r 
-        &&  fabs(g1 - g2) < e_g 
-        &&  fabs(b1 - b2) < e_b
+    int e_g = 10;
+    int e_b = 10;
+    int e_a = 10;
+    if ((fabs(r1 - r2)<e_r)&&(fabs(g1 - g2) < e_g)&&(fabs(b1 - b2) < e_b)&&(fabs(a1 - a2) < e_a)) return 1;
+    else return 0;
     }
 
-bool 
-is_black(int r, g, b) {
+
+int is_black(int r, int g, int b) {
   // Here is the place for experiments and improvments
       int gray=(r+g+b)/3; 
-      if ( gray < 128 ) {
-        return true;
-      } else 
-        return false;
+      if ( gray < 128 ) return 1;
+      else return 0;
 }
 
 
-struct Graph {
+typedef struct Graph {
   int ** V;
   int N; // number of vertices of G;
-};
+}Graph;
 
 Graph* init_graph(int N) {
   Graph * pG = (Graph*)malloc(sizeof(Graph));
   pG->V = (int**) malloc(N*sizeof(int*));
 // add links for incedent vertices
 for (int i =0 ; i < N; i++) {
-   ???????? 
-  pG->V[i] = malloc()
+  // ???????? 
+//  pG->V[i] = malloc()
 }
   return pG;
 }
 
-
 int add_edge(Graph *G, int i, int j , int x, int y, int width) {
   int n = i*width + j;
   int m = x*width + y;
-  int *incedent = p->V[n];
-  for (????)  {
+  int *incedent = G->V[n];
+ //
+ //for (????)  {
     // if m not in incedent[] - add it there!
-  }
+ // }
 
 }
 
@@ -116,7 +117,7 @@ int main() {
             
             get_pixel(i-1, j, &r1, &g1, &b1, &a1, picture, w );
             if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
+                         r1, g1, b1, a1  )) { 
                              add_edge(G, i,j , i-1, j, w);
                          }
 
@@ -127,7 +128,7 @@ int main() {
                          }
             get_pixel(i, j-1, &r1, &g1, &b1, &a1, picture, w );
             if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1,  )) {
+                         r1, g1, b1, a1  )) {
                         add_edge(G, i,j , i, j-1, w);
             }
             get_pixel(i, j+1, &r1, &g1, &b1, &a1, picture, w );
@@ -150,5 +151,3 @@ int main() {
 
     return 0;
 }
-
-
