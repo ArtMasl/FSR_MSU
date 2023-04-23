@@ -86,6 +86,41 @@ void preprocess_image_Gauss(char * image, int width, int height, int n) {
 					image[n*y*width + i + n*x + j] += g[1-i][1-j];
 }
 
+void preprocess_image_Sobel_x(char * image, int width, int height, int n) {
+        int x, y, i, j;
+        double s[3][3];
+        s[0][0] = s[2][0] =  -1;
+	s[0][2] = s[2][2] =  1;
+	s[1][0] = -2;
+	s[1][2] = 2; 
+        s[0][1] = s[1][1] = s[2][1] =  0;
+        for (x=1; x<=(width-2); x++)
+                for (y=1; y<=(height-2); y++)
+                        for (i=-1; i<=1; i++)
+                                for (j=-1; j<=1; j++)
+                                        image[n*y*width + i + n*x + j] += s[1-i][1-j];
+}
+
+void preprocess_image_Sobel_y(char * image, int width, int height, int n) {
+        int x, y, i, j;
+        double s[3][3];
+        s[0][0] = s[0][2] =  -1;
+        s[2][0] = s[2][2] =  1;
+        s[0][1] = -2;
+        s[2][1] = 2;
+        s[1][0] = s[1][1] = s[1][2] =  0;
+        for (x=1; x<=(width-2); x++)
+                for (y=1; y<=(height-2); y++)
+                        for (i=-1; i<=1; i++)
+                                for (j=-1; j<=1; j++)
+                                        image[n*y*width + i + n*x + j] += s[1-i][1-j];
+}
+
+void preprocess_image_Sobel_all(char * image_x, char * image_y, int width, int height, int n) {
+	int i;
+	for (i=0; i<n*width*height; i++) image_x[i] = image_x[i]*image_x[i] + image_y[i]*image_y[i];
+}
+
 int exists(int i,int j,int width,int height){
     if ((i >= 1) && (i <= height - 1) && (j >= 1) && ( j <= width - 1)) return 1;
     return 0; 
@@ -116,18 +151,28 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 
 int main() {
 
-   // char * filename = "C_ver1.png";
-    char * filename = "Scull.png";
+    char * filename = "C_ver1.png";
+    //char * filename = "Scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a, n=4;
     int r1, g1, b1, a1;
     char * picture = loadPng(filename, &w, &h);
+    char * picture_1 = loadPng(filename, &w, &h);
     if (picture == NULL){
         printf("I can not read the picture from the file %s. Error.\n", filename);
         return -1;
     }
 
+    if (picture_1 == NULL){
+        printf("I can not read the picture from the file %s. Error.\n", filename);
+        return -1;
+    }
+
     preprocess_image_Gauss(picture, w, h, n);
+
+    preprocess_image_Sobel_x(picture, w, h, n);
+    preprocess_image_Sobel_y(picture_1, w, h, n);
+    preprocess_image_Sobel_all(picture, picture_1, w, h, n);
 
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
@@ -136,6 +181,7 @@ int main() {
 	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
     }
+    
     char* image = (char*)malloc(w*h*sizeof(char));
     for (i = 0; i < n*w*h; i+=n) {
         image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
@@ -173,8 +219,8 @@ int main() {
         k++;
     }
 
-   // char * new_image = "C_ver1-modified.png";
-    char * new_image = "Scull-modified.png";
+    char * new_image = "C_ver1-modified.png";
+    //char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
