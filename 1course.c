@@ -142,7 +142,7 @@ int main() {
     k=0; 
     for (i=0; i < 4*w*h; i+=4)
     {
-        c = comps[k]%50 + comps[k]%37;
+        c = comps[k]%90 + comps[k]%77;
         data[i] = 4*c - 70;
         data[i + 1] = 3*c + 40;
         data[i + 2] = 5*c + 60;
