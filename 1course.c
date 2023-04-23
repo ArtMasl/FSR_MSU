@@ -103,7 +103,7 @@ int add_edge(Graph *G, int i, int j , int x, int y, int width) {
 
 int main() {
 
-    char * filename = "O_ver3.png";
+    char * filename = "H_ver3.png";
     int w, h;
     int r, g, b, a;
     int r1, g1, b1, a1;
@@ -175,7 +175,7 @@ int main() {
         // use graph connectivity algorithm for connectivity areas
 
     // convert 2D array to file and write it
-    char * new_image = "O_ver3-modified.png";
+    char * new_image = "H_ver3-modified.png";
     writePng(new_image, picture, w, h);
 
     return 0;
