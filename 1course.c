@@ -103,9 +103,9 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 
 int main() {
 
-    char * filename = "Scull.png";
+    char * filename = "C_ver1.png";
     int w, h, i, j, c, k=0, adj_num=0;
-    int r, g, b, a;
+    int r, g, b, a, n=4;
     int r1, g1, b1, a1;
     char * picture = loadPng(filename, &w, &h);
     if (picture == NULL){
@@ -113,12 +113,11 @@ int main() {
         return -1;
     }
     char* image = (char*)malloc(w*h*sizeof(char));
-    for (i = 0; i < 4*w*h; i+=4) {
+    for (i = 0; i < n*w*h; i+=n) {
         image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
         k++;
     } 
-    
-
+  
     for (i=2; i < h-1; i++) {
         for (j=2; j < w-1; j++) {
             if (image[w*i + j] < 92) image[w*i + j] = 0;
@@ -137,20 +136,20 @@ int main() {
                 dfs(i, j, w, h, image, comps, adj_num);
             }
 
-    char* data = (char*)malloc(4*w*h*sizeof(char));
+    char* data = (char*)malloc(n*w*h*sizeof(char));
 
     k=0; 
-    for (i=0; i < 4*w*h; i+=4)
+    for (i=0; i < n*w*h; i+=n)
     {
         c = comps[k]%50 + comps[k]%37;
         data[i] = 4*c - 70;
         data[i + 1] = 3*c + 40;
         data[i + 2] = 5*c + 60;
-        data[i + 3] = 255; 
+        if (n==4) data[i + 3] = 255; 
         k++;
     }
 
-    char * new_image = "Scull-modified.png";
+    char * new_image = "C_ver1-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
