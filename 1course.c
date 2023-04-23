@@ -83,7 +83,7 @@ void preprocess_image_Gauss(char * image, int width, int height, int n) {
 		for (y=1; y<=(height-2); y++)
 			for (i=-1; i<=1; i++)
 				for (j=-1; j<=1; j++)
-					image[n*y*width + i + n*x + j] += g[1-i][1-j];
+					image[n*y*width + n*i + n*x + n*j] += g[1-i][1-j];
 }
 
 void preprocess_image_Sobel_x(char * image, int width, int height, int n) {
@@ -151,8 +151,8 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 
 int main() {
 
-    char * filename = "C_ver1.png";
-    //char * filename = "Scull.png";
+    //char * filename = "C_ver1.png";
+    char * filename = "Scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a, n=4;
     int r1, g1, b1, a1;
@@ -170,9 +170,9 @@ int main() {
 
     preprocess_image_Gauss(picture, w, h, n);
 
-    preprocess_image_Sobel_x(picture, w, h, n);
-    preprocess_image_Sobel_y(picture_1, w, h, n);
-    preprocess_image_Sobel_all(picture, picture_1, w, h, n);
+   // preprocess_image_Sobel_x(picture, w, h, n);
+   // preprocess_image_Sobel_y(picture_1, w, h, n);
+   // preprocess_image_Sobel_all(picture, picture_1, w, h, n);
 
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
@@ -219,8 +219,8 @@ int main() {
         k++;
     }
 
-    char * new_image = "C_ver1-modified.png";
-    //char * new_image = "Scull-modified.png";
+    //char * new_image = "C_ver1-modified.png";
+    char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
