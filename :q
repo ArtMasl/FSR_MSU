@@ -112,6 +112,19 @@ int main() {
         printf("I can not read the picture from the file %s. Error.\n", filename);
         return -1;
     }
+    char* image = (char*)malloc(w*h*sizeof(char));
+    for (i = 0; i < n*w*h; i+=n) {
+        image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
+        k++;
+    } 
+  
+/*    for (i=2; i < h-1; i++) {
+        for (j=2; j < w-1; j++) {
+            if (image[w*i + j] < 92) image[w*i + j] = 0;
+            if (image[w*i + j] <= 149  && image[w*i + j] >= 92) image[w*i + j] = 127;
+            if (image[w*i + j] > 149) image[w*i + j] = 255;
+        }
+    } */
 
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
@@ -119,20 +132,6 @@ int main() {
 	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, a, picture, w);
 	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
-    }
-    char* image = (char*)malloc(w*h*sizeof(char));
-    for (i = 0; i < n*w*h; i+=n) {
-        image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
-        k++;
-    } 
-  
-  /*  for (i=2; i < h-1; i++) {
-        for (j=2; j < w-1; j++) {
-            if (image[w*i + j] < 92) image[w*i + j] = 0;
-            if (image[w*i + j] <= 149  && image[w*i + j] >= 92) image[w*i + j] = 127;
-            if (image[w*i + j] > 149) image[w*i + j] = 255;
-        }
-    } */
 
     int* comps = (int*)malloc((w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
