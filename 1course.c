@@ -131,7 +131,7 @@ int main() {
       return -1;
     }
 
-   preprocess_image_Gauss(picture, w, h);
+  // preprocess_image_Gauss(picture, w, h);
 
   /*  for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
