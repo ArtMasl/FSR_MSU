@@ -73,10 +73,38 @@ int is_black(int r, int g, int b) {
       else return 0;
 }
 
+int exists(int i,int j,int width,int height){
+    if ((i >= 1) && (i <= height - 1) && (j >= 1) && ( j <= width - 1)) return 1;
+    return 0; 
+}
+
+void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_num)
+{
+    components[w*i + j] = col_num;
+    //pixels in triangle which surround us
+    if (exists(i, j-2, w, h))
+        //if differs in color in 80 and not visited yet
+        if ((fabs(ourIm[w*i + j] - ourIm[w*i + (j-2)]) <= 80) && !(components[w*i + (j-2)]))
+            dfs(i, j-2, w, h, ourIm, components, col_num);
+
+
+    if (exists(i-2, j+1, w, h))
+        if ((fabs(ourIm[w*i + j] - ourIm[w*(i-2) + (j+1)]) <= 80) && !(components[w*(i-2) + (j+1)]))
+            dfs(i - 2, j + 1, w, h, ourIm, components, col_num);
+
+
+    if (exists(i+2, j+1, w, h))
+        if ((fabs(ourIm[w*i + j] - ourIm[w*(i+2) + (j+1)]) <= 80) && !(components[w*(i+2) + (j+1)]))
+            dfs(i+2, j+1, w, h, ourIm, components, col_num);
+
+
+    return;
+}
+
 int main() {
 
     char * filename = "scull.png";
-    int w, h, i, j, k=0;
+    int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a;
     int r1, g1, b1, a1;
     char * picture = loadPng(filename, &w, &h);
@@ -86,7 +114,7 @@ int main() {
     }
     char* image = (char*)malloc(w*h*sizeof(char));
     for (i = 0; i < 4*w*h; i+=4) {
-        image[k] = 0.34375*picture[i] + 0.5*picture[i + 1] + 0.15625*picture[i + 2];
+        image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
         k++;
     } 
     
@@ -99,8 +127,31 @@ int main() {
         }
     }
 
+    int* comps = (int*)malloc((w*h)*sizeof(int));
+    for (i=0; i < w*h; i++) comps[i] = 0;
+
+    for (i = 2; i < h-1; i++)
+        for (j = 2; j < w-1; j++)
+            if (!comps[w*i + j]) {
+                adj_num++;
+                dfs(i, j, w, h, image, comps, adj_num);
+            }
+
+    char* data = (char*)malloc(4*w*h*sizeof(char));
+
+    k=0; 
+    for (i=0; i < 4*w*h; i+=4)
+    {
+        c = comps[k]%50 + comps[k]%37;
+        data[i] = 4*c - 70;
+        data[i + 1] = 3*c + 40;
+        data[i + 2] = 5*c + 60;
+        data[i + 3] = 255; 
+        k++;
+    }
+
     char * new_image = "scull-modified.png";
-    writePng(new_image, image, w, h);
+    writePng(new_image, data, w, h);
 
     return 0;
 }
