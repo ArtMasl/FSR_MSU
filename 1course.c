@@ -89,9 +89,16 @@ int main() {
         image[k] = 0.34375*picture[i] + 0.5*picture[i + 1] + 0.15625*picture[i + 2];
         k++;
     } 
-        // use graph connectivity algorithm for connectivity areas
+    
 
-    // convert 2D array to file and write it
+    for (i=2; i < h-1; i++) {
+        for (j=2; j < w-1; j++) {
+            if (image[w*i + j] < 92) image[w*i + j] = 0;
+            if (image[w*i + j] <= 149  && image[w*i + j] >= 92) image[w*i + j] = 127;
+            if (image[w*i + j] > 149) image[w*i + j] = 255;
+        }
+    }
+
     char * new_image = "scull-modified.png";
     writePng(new_image, image, w, h);
 
