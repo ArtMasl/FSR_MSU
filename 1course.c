@@ -69,7 +69,7 @@ int is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
 int is_black(int r, int g, int b) {
   // Here is the place for experiments and improvments
       int gray=(r+g+b)/3;
-      if ( gray < 5 ) return 1;
+      if ( gray > 5 ) return 1;
       else return 0;
 }
 
@@ -123,7 +123,7 @@ int main() {
         for (int j = 0; j < h; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
 	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, a, picture, w);
-	    else set_pixel(i, j, 255, 255, 255, 0, picture, w);
+	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
     } 
 
