@@ -73,7 +73,7 @@ int is_black(int r, int g, int b) {
       else return 0;
 }
 
-void preprocess_image_Gauss(char * image, int width, int height) {
+/*  void preprocess_image_Gauss(char * image, int width, int height) {
 	int x, y, i, j;
 	double g[3][3];
 	g[0][0] = g[0][2] = g[2][0] = g[2][2] =  0.0924;
@@ -84,7 +84,7 @@ void preprocess_image_Gauss(char * image, int width, int height) {
 			for (i=-1; i<=1; i++)
 				for (j=-1; j<=1; j++)
 					image[x*width + i + y + j] += g[1-i][1-j];
-}
+}*/
 
 typedef struct Graph {
   int ** V;
