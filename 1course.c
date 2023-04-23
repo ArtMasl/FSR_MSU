@@ -83,7 +83,7 @@ void preprocess_image_Gauss(char * image, int width, int height) {
 		for (y=1; y<=(height-2); y++)
 			for (i=-1; i<=1; i++)
 				for (j=-1; j<=1; j++)
-					image[x+i][y+j] += g[1-i][1-j];
+					image[x*width + i + y + j] += g[1-i][1-j];
 }
 
 typedef struct Graph {
@@ -131,7 +131,7 @@ int main() {
       return -1;
     }
 
-  //  preprocess_image_Gauss(&picture, w, h);
+   preprocess_image_Gauss(picture, w, h);
 
   /*  for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
