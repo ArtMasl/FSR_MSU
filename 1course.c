@@ -96,18 +96,18 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
     components[w*i + j] = col_num;
     //pixels in triangle which surround us
     if (exists(i, j-2, w, h))
-        //if differs in color in 80 and not visited yet
-        if ((fabs(ourIm[w*i + j] - ourIm[w*i + (j-2)]) <= 80) && !(components[w*i + (j-2)]))
+        //if differs in color in 10 and not visited yet
+        if ((fabs(ourIm[w*i + j] - ourIm[w*i + (j-2)]) <= 10) && !(components[w*i + (j-2)]))
             dfs(i, j-2, w, h, ourIm, components, col_num);
 
 
     if (exists(i-2, j+1, w, h))
-        if ((fabs(ourIm[w*i + j] - ourIm[w*(i-2) + (j+1)]) <= 80) && !(components[w*(i-2) + (j+1)]))
+        if ((fabs(ourIm[w*i + j] - ourIm[w*(i-2) + (j+1)]) <= 10) && !(components[w*(i-2) + (j+1)]))
             dfs(i - 2, j + 1, w, h, ourIm, components, col_num);
 
 
     if (exists(i+2, j+1, w, h))
-        if ((fabs(ourIm[w*i + j] - ourIm[w*(i+2) + (j+1)]) <= 80) && !(components[w*(i+2) + (j+1)]))
+        if ((fabs(ourIm[w*i + j] - ourIm[w*(i+2) + (j+1)]) <= 10) && !(components[w*(i+2) + (j+1)]))
             dfs(i+2, j+1, w, h, ourIm, components, col_num);
 
 
@@ -116,8 +116,8 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 
 int main() {
 
-    char * filename = "C_ver1.png";
-   // char * filename = "Scull.png";
+   // char * filename = "C_ver1.png";
+    char * filename = "Scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a, n=4;
     int r1, g1, b1, a1;
@@ -129,26 +129,26 @@ int main() {
 
     preprocess_image_Gauss(picture, w, h, n);
 
-   /* for (int i = 0; i < w; i++){
+    for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
 	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, a, picture, w);
 	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
-    }*/
+    }
     char* image = (char*)malloc(w*h*sizeof(char));
     for (i = 0; i < n*w*h; i+=n) {
         image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
         k++;
     } 
   
-    for (i=2; i < h-1; i++) {
+   /* for (i=2; i < h-1; i++) {
         for (j=2; j < w-1; j++) {
             if (image[w*i + j] < 92) image[w*i + j] = 0;
             if (image[w*i + j] <= 149  && image[w*i + j] >= 92) image[w*i + j] = 127;
             if (image[w*i + j] > 149) image[w*i + j] = 255;
         }
-    } 
+    }*/ 
 
     int* comps = (int*)malloc((w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
@@ -173,8 +173,8 @@ int main() {
         k++;
     }
 
-    char * new_image = "C_ver1-modified.png";
-   // char * new_image = "Scull-modified.png";
+   // char * new_image = "C_ver1-modified.png";
+    char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
