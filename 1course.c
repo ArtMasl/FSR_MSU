@@ -73,6 +73,18 @@ int is_black(int r, int g, int b) {
       else return 0;
 }
 
+void preprocess_image_Gauss(char * image, int width, int height) {
+	int x, y, i, j;
+	double g[3][3];
+	g[0][0] = g[0][2] = g[2][0] = g[2][2] =  0.0924;
+        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  0.1192;
+	g[1][1] = 0.1538;
+	for (x=1; x<=(width-2); x++)
+		for (y=1; y<=(height-2); y++)
+			for (i=-1; i<=1; i++)
+				for (j=-1; j<=1; j++)
+					image[x+i][y+j] += g[1-i][1-j];
+}
 
 typedef struct Graph {
   int ** V;
@@ -119,13 +131,15 @@ int main() {
       return -1;
     }
 
-    for (int i = 0; i < w; i++){
+  //  preprocess_image_Gauss(&picture, w, h);
+
+  /*  for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
 	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, a, picture, w);
 	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
-    } 
+    } */ 
 
     // read file and convert it to 2D array
         // function get_pixel is simple
