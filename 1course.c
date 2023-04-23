@@ -131,7 +131,7 @@ int main() {
         for (int j = 0; j < h; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
            // set_pixel(i, j, 0, 0, 0, a, picture, w);
-            set_pixel(i, j, 255, 255, 255, 0, picture, w);
+            set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
     }
 
