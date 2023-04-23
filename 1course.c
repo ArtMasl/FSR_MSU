@@ -123,7 +123,7 @@ int main() {
         for (int j = 1; j < h-1; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
 	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, 0, picture, w);
-	    else set_pixel(i, j, 255, 255, 255, 0, picture, w);
+	    else set_pixel(i, j, 255, 255, 255, 255, picture, w);
         }
     }
     // read file and convert it to 2D array
