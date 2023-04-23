@@ -119,15 +119,15 @@ int main() {
       return -1;
     }
 
-    for (int i = 1; i < w-1; i++){
+ /*   for (int i = 1; i < w-1; i++){
         for (int j = 1; j < h-1; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
             set_pixel(i, j, 0, 0, b, a, picture, w);
         }
-    }
+    }*/
     // read file and convert it to 2D array
         // function get_pixel is simple
-   /* for (int i = 1; i < w-1; i++){
+     for (int i = 1; i < w-1; i++){
         for (int j = 1; j < h-1; j++){
             int r, g, b, a;
             int r1, g1, b1, a1;
@@ -138,6 +138,7 @@ int main() {
                          r1, g1, b1, a1  )) {
                              add_edge(G, i,j , i-1, j, w);
                          }
+
 
             get_pixel(i+1, j, &r1, &g1, &b1, &a1, picture, w );
             if (is_close(r,  g,  b,  a,
@@ -157,7 +158,7 @@ int main() {
 
 
         }
-    }*/
+    }
 
 
     // analyze 2D array
