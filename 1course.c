@@ -103,7 +103,7 @@ int add_edge(Graph *G, int i, int j , int x, int y, int width) {
 
 int main() {
 
-    char * filename = "H_ver3.png";
+    char * filename = "scull.png";
     int w, h;
     int r, g, b, a;
     int r1, g1, b1, a1;
@@ -119,21 +119,13 @@ int main() {
       return -1;
     }
 
-   /*  for (int i = 1; i < w-1; i++){
-        for (int j = 1; j < h-1; j++){
+    for (int i = 0; i < w; i++){
+        for (int j = 0; j < h; j++){
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
 	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, a, picture, w);
 	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
         }
-    } */
-
-    for (int i = 0; i < w; i++){
-        for (int j = 0; j < h; j++){
-            get_pixel(i, j, &r, &g, &b, &a, picture, w);
-           // set_pixel(i, j, 0, 0, 0, a, picture, w);
-            set_pixel(i, j, 255, 255, 255, a, picture, w);
-        }
-    }
+    } 
 
     // read file and convert it to 2D array
         // function get_pixel is simple
@@ -175,7 +167,7 @@ int main() {
         // use graph connectivity algorithm for connectivity areas
 
     // convert 2D array to file and write it
-    char * new_image = "H_ver3-modified.png";
+    char * new_image = "scull-modified.png";
     writePng(new_image, picture, w, h);
 
     return 0;
