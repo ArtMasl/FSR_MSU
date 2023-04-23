@@ -69,7 +69,7 @@ int is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
 int is_black(int r, int g, int b) {
   // Here is the place for experiments and improvments
       int gray=(r+g+b)/3;
-      if ( gray < 5 ) return 1;
+      if ( gray < 64 ) return 1;
       else return 0;
 }
 
@@ -103,6 +103,7 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 
 int main() {
 
+   // char * filename = "C_ver1.png";
     char * filename = "Scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a, n=4;
@@ -157,6 +158,7 @@ int main() {
         k++;
     }
 
+   // char * new_image = "C_ver1-modified.png";
     char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
