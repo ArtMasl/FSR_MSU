@@ -103,7 +103,7 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 
 int main() {
 
-    char * filename = "C_ver1.png";
+    char * filename = "Scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a;
     int r1, g1, b1, a1;
@@ -142,7 +142,7 @@ int main() {
     k=0; 
     for (i=0; i < 4*w*h; i+=4)
     {
-        c = comps[k]%90 + comps[k]%77;
+        c = comps[k]%50 + comps[k]%37;
         data[i] = 4*c - 70;
         data[i + 1] = 3*c + 40;
         data[i + 2] = 5*c + 60;
@@ -150,7 +150,7 @@ int main() {
         k++;
     }
 
-    char * new_image = "C_ver1-modified.png";
+    char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
