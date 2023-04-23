@@ -73,50 +73,10 @@ int is_black(int r, int g, int b) {
       else return 0;
 }
 
-/*  void preprocess_image_Gauss(char * image, int width, int height) {
-	int x, y, i, j;
-	double g[3][3];
-	g[0][0] = g[0][2] = g[2][0] = g[2][2] =  0.0924;
-        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  0.1192;
-	g[1][1] = 0.1538;
-	for (x=1; x<=(width-2); x++)
-		for (y=1; y<=(height-2); y++)
-			for (i=-1; i<=1; i++)
-				for (j=-1; j<=1; j++)
-					image[x*width + i + y + j] += g[1-i][1-j];
-}*/
-
-typedef struct Graph {
-  int ** V;
-  int N; // number of vertices of G;
-}Graph;
-
-Graph* init_graph(int N) {
-  Graph * pG = (Graph*)malloc(sizeof(Graph));
-  pG->V = (int**) malloc(N*sizeof(int*));
-// add links for incedent vertices
-for (int i =0 ; i < N; i++) {
-  // ????????
-//  pG->V[i] = malloc()
-}
-  return pG;
-}
-
-int add_edge(Graph *G, int i, int j , int x, int y, int width) {
-  int n = i*width + j;
-  int m = x*width + y;
-  int *incedent = G->V[n];
- //
- //for (????)  {
-   // if m not in incedent[] - add it there!
- // }
-
-}
-
 int main() {
 
     char * filename = "scull.png";
-    int w, h;
+    int w, h, i, j, k=0;
     int r, g, b, a;
     int r1, g1, b1, a1;
     char * picture = loadPng(filename, &w, &h);
@@ -124,65 +84,16 @@ int main() {
         printf("I can not read the picture from the file %s. Error.\n", filename);
         return -1;
     }
-
-    Graph* G = init_graph(w*h);
-    if (G == NULL) {
-      printf("Can not allocate memory for Graph\n");
-      return -1;
-    }
-
-  // preprocess_image_Gauss(picture, w, h);
-
-  /*  for (int i = 0; i < w; i++){
-        for (int j = 0; j < h; j++){
-            get_pixel(i, j, &r, &g, &b, &a, picture, w);
-	    if (is_black(r, g, b)) set_pixel(i, j, 0, 0, 0, a, picture, w);
-	    else set_pixel(i, j, 255, 255, 255, a, picture, w);
-        }
-    } */ 
-
-    // read file and convert it to 2D array
-        // function get_pixel is simple
-     for (int i = 1; i < w-1; i++){
-        for (int j = 1; j < h-1; j++){
-            int r, g, b, a;
-            int r1, g1, b1, a1;
-            get_pixel(i, j, &r, &g, &b, &a, picture, w);
-
-            get_pixel(i-1, j, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                             add_edge(G, i,j , i-1, j, w);
-                         }
-
-
-            get_pixel(i+1, j, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                             add_edge(G, i,j , i+1, j, w);
-                         }
-            get_pixel(i, j-1, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                        add_edge(G, i,j , i, j-1, w);
-            }
-            get_pixel(i, j+1, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                        add_edge(G, i,j , i, j+1, w);
-            }
-
-
-        }
-    }
-
-
-    // analyze 2D array
+    char* image = (char*)malloc(w*h*sizeof(char));
+    for (i = 0; i < 4*w*h; i+=4) {
+        image[k] = 0.34375*picture[i] + 0.5*picture[i + 1] + 0.15625*picture[i + 2];
+        k++;
+    } 
         // use graph connectivity algorithm for connectivity areas
 
     // convert 2D array to file and write it
     char * new_image = "scull-modified.png";
-    writePng(new_image, picture, w, h);
+    writePng(new_image, image, w, h);
 
     return 0;
 }
