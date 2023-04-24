@@ -82,7 +82,7 @@ void preprocess_image_Gauss(char * image, int width, int height, int n) {
                 for (y=1; y<=(height-2); y++)
                         for (i=-1; i<=1; i++)
                                 for (j=-1; j<=1; j++)
-                                        image[n*y*width + n*i + n*x + n*j] += g[1-i][1-j];
+                                        image[n*(y+j)*width + n*i + n*x] += g[1-i][1-j];
 }
   void preprocess_image_Sobel_x(char * image, int width, int height, int n) {
         int x, y, i, j;
