@@ -158,6 +158,15 @@ int main() {
     char * picture_1 = loadPng(filename, &w, &h);
     preprocess_image_Sobel_x(picture, w, h, n);
     preprocess_image_Sobel_y(picture_1, w, h, n);
+    if (picture == NULL){
+        printf("I can not read the picture from the file %s. Error.\n", filename);
+        return -1;
+    }
+
+    if (picture_1 == NULL){
+        printf("I can not read the picture from the file %s. Error.\n", filename);
+        return -1;
+    }
     preprocess_image_Sobel_all(picture, picture_1, w, h, n);
     char * new_image = "Scull-Sobel.png";
     writePng(new_image, picture, w, h);
