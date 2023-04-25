@@ -164,11 +164,11 @@ int main() {
         return -1;
     }
 
-    preprocess_image_Gauss(picture, w, h, n);
-
     preprocess_image_Sobel_x(picture, w, h, n);
     preprocess_image_Sobel_y(picture_1, w, h, n);
     preprocess_image_Sobel_all(picture, picture_1, w, h, n);
+
+    preprocess_image_Gauss(picture, w, h, n);
  
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
