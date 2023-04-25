@@ -115,7 +115,7 @@ void preprocess_image_Sobel_y(char * image, int width, int height, int n) {
 }
 void preprocess_image_Sobel_all(char * image_x, char * image_y, int width, int height, int n) {
         int i;
-     //   for (i=0; i<n*width*height; i++) image_x[i] = sqrt(image_x[i]*image_x[i] + image_y[i]*image_y[i]);
+        for (i=0; i<n*width*height; i++) image_x[i] = sqrt(image_x[i]*image_x[i] + image_y[i]*image_y[i]);
 }
 
 int exists(int i,int j,int width,int height){
@@ -164,11 +164,11 @@ int main() {
         return -1;
     }
 
-    preprocess_image_Gauss(picture, w, h, n);
+    //preprocess_image_Gauss(picture, w, h, n);
 
-    //preprocess_image_Sobel_x(picture, w, h, n);
-    //preprocess_image_Sobel_y(picture_1, w, h, n);
-    //preprocess_image_Sobel_all(picture, picture_1, w, h, n);
+    preprocess_image_Sobel_x(picture, w, h, n);
+    preprocess_image_Sobel_y(picture_1, w, h, n);
+    preprocess_image_Sobel_all(picture, picture_1, w, h, n);
  
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
