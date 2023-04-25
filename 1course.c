@@ -76,8 +76,8 @@ void preprocess_image_Gauss(char * image, int width, int height, int n) {
         int x, y, i, j;
         double g[3][3];
         g[0][0] = g[0][2] = g[2][0] = g[2][2] =  1;
-        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  2;
-        g[1][1] = 4;
+        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  4;
+        g[1][1] = 12;
         for (x=1; x<=(width-2); x++)
                 for (y=1; y<=(height-2); y++)
                         for (i=-1; i<=1; i++)
@@ -123,23 +123,28 @@ int exists(int i,int j,int width,int height){
     return 0;
 }
 
-void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num)
-{
+void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num) {
+    int r, g, b, a;
+    int r1, g1, b1, a1;
     components[w*i + j] = adj_num;
-    if (exists(i, j-2, w, h))
-        if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 10) && !(components[w*i + (j-2)]))
+    get_pixel(i, j, &r, &g, &b, &a, image, w);
+    if (exists(i, j-2, w, h)) {
+	get_pixel(i, j-2, &r1, &g1, &b1, &a1, image, w);
+        if ((is_close(r, g, b, a, r1, g1, b1, a1)) && !(components[w*i + (j-2)]))
             DFS(i, j-2, w, h, image, components, adj_num);
+    }
 
-
-    if (exists(i-2, j+1, w, h))
-        if ((fabs(image[w*i + j] - image[w*(i-2) + (j+1)]) <= 10) && !(components[w*(i-2) + (j+1)]))
+    if (exists(i-2, j+1, w, h)) {
+        get_pixel(i-2, j+1, &r1, &g1, &b1, &a1, image, w);
+        if ((is_close(r, g, b, a, r1, g1, b1, a1)) && !(components[w*(i-2) + (j+1)]))
             DFS(i-2, j+1, w, h, image, components, adj_num);
+    }
 
-
-    if (exists(i+2, j+1, w, h))
-        if ((fabs(image[w*i + j] - image[w*(i+2) + (j+1)]) <= 10) && !(components[w*(i+2) + (j+1)]))
+    if (exists(i+2, j+1, w, h)) {
+	get_pixel(i+2, j+1, &r1, &g1, &b1, &a1, image, w);
+        if ((is_close(r, g, b, a, r1, g1, b1, a1)) && !(components[w*(i+2) + (j+1)]))
             DFS(i+2, j+1, w, h, image, components, adj_num);
-
+    }
  
 
     return;
@@ -148,27 +153,27 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 int main() {
 
     //char * filename = "C_ver1.png";
-    char * filename = "Scull.png";
+    char * filename = "scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a, n=4;
     int r1, g1, b1, a1;
     char * picture = loadPng(filename, &w, &h);
-    char * picture_1 = loadPng(filename, &w, &h);
+    //char * picture_1 = loadPng(filename, &w, &h);
     if (picture == NULL){
         printf("I can not read the picture from the file %s. Error.\n", filename);
         return -1;
     }
 
-    if (picture_1 == NULL){
-        printf("I can not read the picture from the file %s. Error.\n", filename);
-        return -1;
-    }
+    //if (picture_1 == NULL){
+      //  printf("I can not read the picture from the file %s. Error.\n", filename);
+        //return -1;
+    //}
 
     preprocess_image_Gauss(picture, w, h, n);
 
-    preprocess_image_Sobel_x(picture, w, h, n);
-    preprocess_image_Sobel_y(picture_1, w, h, n);
-    preprocess_image_Sobel_all(picture, picture_1, w, h, n);
+    //preprocess_image_Sobel_x(picture, w, h, n);
+    //preprocess_image_Sobel_y(picture_1, w, h, n);
+    //preprocess_image_Sobel_all(picture, picture_1, w, h, n);
  
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
@@ -178,38 +183,27 @@ int main() {
         }
     }
 
-    char* image = (char*)malloc(w*h*sizeof(char));
-    for (i = 0; i < n*w*h; i+=n) {
-        image[k] = 0.34375*picture[i] + 0.5*picture[i+1] + 0.15625*picture[i+2];
-        k++;
-    }
-
     int* comps = (int*)malloc((w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
 
-    for (i = 2; i < h-1; i++)
-        for (j = 2; j < w-1; j++)
+    for (i=2; i < h-1; i++)
+        for (j=2; j < w-1; j++)
             if (!comps[w*i + j]) {
                    adj_num++;
-                DFS(i, j, w, h, image, comps, adj_num);
+                DFS(i, j, w, h, picture, comps, adj_num);
             }
 
-    char* data = (char*)malloc(n*w*h*sizeof(char));
-
     k=0;
-    for (i=0; i < n*w*h; i+=n)
-    {
-        c = comps[k]%50 + comps[k]%37;
-        data[i] = 4*c - 70;
-        data[i+1] = 3*c + 40;
-        data[i+2] = 5*c + 60;
-        if (n==4) data[i+3] = 255;
-        k++;
-    }
+    for (i=0; i < n*w; i+=n)
+	for (j=0; j < n*h; j+=n) {
+            c = comps[k]%50 + comps[k]%37;
+	    set_pixel(i, j, (4*c -70), (3*c + 40), (5*c + 60), 255, picture, w);
+            k++;
+        }
 
     //char * new_image = "C_ver1-modified.png";
-    char * new_image = "Scull-modified.png";
-    writePng(new_image, data, w, h);
+    char * new_image = "scull-modified.png";
+    writePng(new_image, picture, w, h);
 
     return 0;
 }
