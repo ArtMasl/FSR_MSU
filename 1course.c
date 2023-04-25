@@ -76,8 +76,8 @@ void preprocess_image_Gauss(char * image, int width, int height, int n) {
         int x, y, i, j;
         double g[3][3];
         g[0][0] = g[0][2] = g[2][0] = g[2][2] =  1;
-        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  4;
-        g[1][1] = 12;
+        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  2;
+        g[1][1] = 4;
         for (x=1; x<=(width-2); x++)
                 for (y=1; y<=(height-2); y++)
                         for (i=-1; i<=1; i++)
@@ -164,11 +164,11 @@ int main() {
         return -1;
     }
 
+    preprocess_image_Gauss(picture, w, h, n);
+
     preprocess_image_Sobel_x(picture, w, h, n);
     preprocess_image_Sobel_y(picture_1, w, h, n);
     preprocess_image_Sobel_all(picture, picture_1, w, h, n);
-
-    preprocess_image_Gauss(picture, w, h, n);
  
     for (int i = 0; i < w; i++){
         for (int j = 0; j < h; j++){
