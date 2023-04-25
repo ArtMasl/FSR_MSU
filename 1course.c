@@ -68,16 +68,16 @@ int is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
 int is_black(int r, int g, int b) {
   // Here is the place for experiments and improvments
       int gray=(r+g+b)/3;
-      if ( gray < 32 ) return 1;
+      if ( gray < 64 ) return 1;
       else return 0;
 }
 
 void preprocess_image_Gauss(char * image, int width, int height, int n) {
         int x, y, i, j;
         double g[3][3];
-        g[0][0] = g[0][2] = g[2][0] = g[2][2] =  0.0924;
-        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  0.1192;
-        g[1][1] = 0.1538;
+        g[0][0] = g[0][2] = g[2][0] = g[2][2] =  1;
+        g[0][1] = g[1][0] = g[1][2] = g[2][1] =  4;
+        g[1][1] = 12;
         for (x=1; x<=(width-2); x++)
                 for (y=1; y<=(height-2); y++)
                         for (i=-1; i<=1; i++)
@@ -164,7 +164,7 @@ int main() {
         return -1;
     }
 
-    //preprocess_image_Gauss(picture, w, h, n);
+    preprocess_image_Gauss(picture, w, h, n);
 
     preprocess_image_Sobel_x(picture, w, h, n);
     preprocess_image_Sobel_y(picture_1, w, h, n);
