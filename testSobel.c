@@ -150,7 +150,7 @@ void dfs(int i,int j,int w,int h,unsigned char* ourIm, int* components,int col_n
 int main() {
 
     //char * filename = "C_ver1.png";
-    char * filename = "Scull.png";
+    char * filename = "scull.png";
     int w, h, i, j, c, k=0, adj_num=0;
     int r, g, b, a, n=4;
     int r1, g1, b1, a1;
@@ -168,7 +168,7 @@ int main() {
         return -1;
     }
     preprocess_image_Sobel_all(picture, picture_1, w, h, n);
-    char * new_image = "Scull-Sobel.png";
+    char * new_image = "scull-Sobel.png";
     writePng(new_image, picture, w, h);
 
     return 0;
