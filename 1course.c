@@ -68,7 +68,7 @@ int is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
 int is_black(int r, int g, int b) {
   // Here is the place for experiments and improvments
       int gray=(r+g+b)/3;
-      if ( gray < 64 ) return 1;
+      if ( gray < 96 ) return 1;
       else return 0;
 }
 

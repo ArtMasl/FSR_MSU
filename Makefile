@@ -1,8 +1,8 @@
-all: lodepng.o testSobel.o
-	gcc -o sobel.exe lodepng.o testSobel.o -lm
+all: lodepng.o 1course.o
+	gcc -o analyzer.exe lodepng.o 1course.o -lm
 lodepng.o: lodepng.h lodepng.c
 	gcc -c lodepng.c
-testSobel.o: testSobel.c
-	gcc -c testSobel.c
+1course.o: 1course.c
+	gcc -c 1course.c
 clean:
-	rm *.o sobel.exe
+	rm *.o analyzer.exe
