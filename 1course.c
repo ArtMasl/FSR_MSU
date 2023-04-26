@@ -134,8 +134,8 @@ int main() {
     char* image_1 = image;
 
     preparation(image, w, h);
-    fSobel(image_1, image, w, h);
-    fGauss(image, image_1, w, h);
+    fGauss(image_1, image, w, h);
+    fSobel(image, image_1, w, h);
 
     int* comps = (int*)malloc((w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
