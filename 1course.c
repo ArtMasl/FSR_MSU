@@ -94,24 +94,23 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 {
     components[w*i + j] = adj_num;
     if (exists(i, j-2, w, h))
-        if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 30) && !(components[w*i + (j-2)]))
+        if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 10) && !(components[w*i + (j-2)]))
             DFS(i, j-2, w, h, image, components, adj_num);
 
  
 
     if (exists(i-2, j+1, w, h))
-        if ((fabs(image[w*i + j] - image[w*(i-2) + (j+1)]) <= 30) && !(components[w*(i-2) + (j+1)]))
+        if ((fabs(image[w*i + j] - image[w*(i-2) + (j+1)]) <= 10) && !(components[w*(i-2) + (j+1)]))
             DFS(i-2, j+1, w, h, image, components, adj_num);
 
 
     if (exists(i+2, j+1, w, h))
-        if ((fabs(image[w*i + j] - image[w*(i+2) + (j+1)]) <= 30) && !(components[w*(i+2) + (j+1)]))
+        if ((fabs(image[w*i + j] - image[w*(i+2) + (j+1)]) <= 10) && !(components[w*(i+2) + (j+1)]))
             DFS(i+2, j+1, w, h, image, components, adj_num);
-
-
 
     return;
 }
+
 
 int main() {
 
@@ -133,8 +132,8 @@ int main() {
 
     char* image_1 = image;
 
-    preparation(image, w, h);
     fGauss(image, image_1, w, h);
+    preparation(image_1, w, h);
    // fSobel(image, image_1, w, h);
    // colouring(image_1, data, w, h, n);
     int* comps = (int*)malloc((n*w*h)*sizeof(int));
