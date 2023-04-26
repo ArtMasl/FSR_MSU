@@ -115,8 +115,8 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 
 int main() {
 
-    //char * filename = "C_ver1.png";
-    char * filename = "Scull.png";
+    char * filename = "hamster.png";
+    //char * filename = "Scull.png";
     int w, h, i, j, k=0, adj_num=0, n=4;
     char * picture = loadPng(filename, &w, &h);
     if (picture == NULL){
@@ -134,8 +134,8 @@ int main() {
     char* image_1 = image;
 
     preparation(image, w, h);
-   // fGauss(image_1, image, w, h);
-    fSobel(image, image_1, w, h);
+    fGauss(image, image_1, w, h);
+   // fSobel(image, image_1, w, h);
 
     char* data = (char*)malloc(n*w*h*sizeof(char));
     colouring(image_1, data, w, h, n);
@@ -161,8 +161,8 @@ int main() {
         k++;
    } */
 
-    //char * new_image = "C_ver1-modified.png";
-    char * new_image = "Scull-modified.png";
+    char * new_image = "hamster-modified.png";
+    //char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
