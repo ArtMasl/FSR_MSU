@@ -144,7 +144,7 @@ int main() {
         for (j = 2; j < w-1; j++)
             if (!comps[w*i + j]) {
                    adj_num++;
-                DFS(i, j, w, h, image, comps, adj_num);
+                DFS(i, j, w, h, image_1, comps, adj_num);
             }
 
     char* data = (char*)malloc(n*w*h*sizeof(char));
