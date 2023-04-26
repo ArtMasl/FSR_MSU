@@ -94,18 +94,18 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 {
     components[w*i + j] = adj_num;
     if (exists(i, j-2, w, h))
-        if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 10) && !(components[w*i + (j-2)]))
+        if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 20) && !(components[w*i + (j-2)]))
             DFS(i, j-2, w, h, image, components, adj_num);
 
  
 
     if (exists(i-2, j+1, w, h))
-        if ((fabs(image[w*i + j] - image[w*(i-2) + (j+1)]) <= 10) && !(components[w*(i-2) + (j+1)]))
+        if ((fabs(image[w*i + j] - image[w*(i-2) + (j+1)]) <= 20) && !(components[w*(i-2) + (j+1)]))
             DFS(i-2, j+1, w, h, image, components, adj_num);
 
 
     if (exists(i+2, j+1, w, h))
-        if ((fabs(image[w*i + j] - image[w*(i+2) + (j+1)]) <= 10) && !(components[w*(i+2) + (j+1)]))
+        if ((fabs(image[w*i + j] - image[w*(i+2) + (j+1)]) <= 20) && !(components[w*(i+2) + (j+1)]))
             DFS(i+2, j+1, w, h, image, components, adj_num);
 
 
@@ -115,8 +115,8 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 
 int main() {
 
-    char * filename = "hamster.png";
-    //char * filename = "Scull.png";
+    //char * filename = "hamster.png";
+    char * filename = "Scull.png";
     int w, h, i, j, k=0, adj_num=0, n=4;
     char * picture = loadPng(filename, &w, &h);
     if (picture == NULL){
@@ -136,10 +136,8 @@ int main() {
     preparation(image, w, h);
     fGauss(image, image_1, w, h);
    // fSobel(image, image_1, w, h);
-
-    char* data = (char*)malloc(n*w*h*sizeof(char));
-    colouring(image_1, data, w, h, n);
-  /*  int* comps = (int*)malloc((w*h)*sizeof(int));
+   // colouring(image_1, data, w, h, n);
+    int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
 
     for (i = 2; i < h-1; i++)
@@ -159,10 +157,10 @@ int main() {
         data[i+2] = 150+comps[k];
         if (n==4) data[i+3] = 255;
         k++;
-   } */
+   } 
 
-    char * new_image = "hamster-modified.png";
-    //char * new_image = "Scull-modified.png";
+    //char * new_image = "hamster-modified.png";
+    char * new_image = "Scull-modified.png";
     writePng(new_image, data, w, h);
 
     return 0;
