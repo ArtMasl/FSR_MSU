@@ -134,7 +134,7 @@ int main() {
     char* image_1 = image;
 
     preparation(image, w, h);
-    fGauss(image_1, image, w, h);
+   // fGauss(image_1, image, w, h);
     fSobel(image, image_1, w, h);
 
     char* data = (char*)malloc(n*w*h*sizeof(char));
