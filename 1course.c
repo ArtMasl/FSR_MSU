@@ -64,7 +64,7 @@ void fGauss(char * od, char * dc, int w, int h){
         for (i=1; i < h-1; i++)
            for (j=1; j < w-1; j++) {
                 dc[w*i+j]=0.12*od[w*i+j]+0.12*od[w*(i+1)+j]+0.12*od[w*(i-1)+j];
-                 dc[w*i+j]=dc[w*i+j]+0.12*od[w*i+(j+1)]+0.12*od[w*i+(j-1)];
+                dc[w*i+j]=dc[w*i+j]+0.12*od[w*i+(j+1)]+0.12*od[w*i+(j-1)];
                 dc[w*i+j]=dc[w*i+j]+0.09*od[w*(i+1)+(j+1)]+0.09*od[w*(i+1)+(j-1)];
                 dc[w*i+j]=dc[w*i+j]+0.09*od[w*(i-1)+(j+1)]+0.09*od[w*(i-1)+(j-1)];
            }
@@ -134,7 +134,7 @@ int main() {
     char* image_1 = image;
 
     preparation(image, w, h);
-//    fSobel(image, image_1, w, h);
+    fSobel(image_1, image, w, h);
     fGauss(image, image_1, w, h);
 
     int* comps = (int*)malloc((w*h)*sizeof(int));
