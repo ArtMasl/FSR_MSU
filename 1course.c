@@ -157,13 +157,13 @@ int main() {
         image[k] = 0.299*picture[i] + 0.578*picture[i+1] + 0.114*picture[i+2];
         k++;
     }
-
+    char* image_0 = (char*)malloc(w*h*sizeof(char));
     char* image_1 = (char*)malloc(w*h*sizeof(char));
     char* data = (char*)malloc(n*w*h*sizeof(char));
 
     preparation(image, w, h);
-    fGauss(image, image_1, w, h);
-   // fSobel(image, image_1, w, h);
+    fGauss(image, image_0, w, h);
+    fSobel(image_0, image_1, w, h);
     colouring(image_1, data, w, h, n);
   /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
