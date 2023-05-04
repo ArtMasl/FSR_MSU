@@ -167,7 +167,7 @@ int main() {
 
     preparation(image, w, h);
     fSobel(image, image_0, w, h);
-    fGauss(image_0, image_2, w, h);
+    fSobel(image_0, image_2, w, h);
     fSobel(image_3, image_4, w, h);
     fGauss(image_4, image_5, w, h);
     fSobel(image_5, image_1, w, h);
