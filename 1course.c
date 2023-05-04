@@ -73,12 +73,10 @@ void fGauss(char * od, char * dc, int w, int h){
 
 void colouring(char * dc, char * mcod, int w, int h, int n){
         int i;
-        int c[w*h];
-        for (i=0; i<w*h; i++) c[i]=dc[i];
         for (i=1; i<w*h; i++) {
-                mcod[i*n]=80+c[i]+0.5*c[i-1];
-                mcod[i*n+1]=45+c[i];
-                mcod[i*n+2]=150+c[i];
+                mcod[i*n]=80+dc[i]+0.5*dc[i-1];
+                mcod[i*n+1]=45+dc[i];
+                mcod[i*n+2]=150+dc[i];
                 mcod[i*n+3]=225;
         }
         return;
@@ -160,15 +158,14 @@ int main() {
         k++;
     }
 
-    char* image_1 = image;
-
+    char* image_1 = (char*)malloc(w*h*sizeof(char));
     char* data = (char*)malloc(n*w*h*sizeof(char));
 
     preparation(image, w, h);
     fGauss(image, image_1, w, h);
    // fSobel(image, image_1, w, h);
-    //colouring(image_1, data, w, h, n);
-    int* comps = (int*)malloc((n*w*h)*sizeof(int));
+    colouring(image_1, data, w, h, n);
+  /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
 
     for (i = 2; i < h-1; i++)
@@ -186,7 +183,7 @@ int main() {
         data[i+2] = 150+comps[k];
         if (n==4) data[i+3] = 255;
         k++;
-   } 
+	}*/ 
 
     //char * new_image = "hamster-modified.png";
     char * new_image = "Scull-modified.png";
