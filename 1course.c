@@ -93,6 +93,36 @@ int exists(int i,int j,int width,int height){
 void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num)
 {
     components[w*i + j] = adj_num;
+    if (exists(i, j-1, w, h))
+        if ((fabs(image[w*i + j] - image[w*i + (j-1)]) <= 10) && !(components[w*i + (j-1)]))
+            DFS(i, j-1, w, h, image, components, adj_num);
+    if (exists(i, j+1, w, h))
+        if ((fabs(image[w*i + j] - image[w*i + (j+1)]) <= 10) && !(components[w*i + (j+1)]))
+            DFS(i, j+1, w, h, image, components, adj_num);
+    if (exists(i-1, j, w, h))
+        if ((fabs(image[w*i + j] - image[w*(i-1) + j]) <= 10) && !(components[w*(i-1) + j]))
+            DFS(i-1, j, w, h, image, components, adj_num);
+    if (exists(i-1, j-1, w, h))
+        if ((fabs(image[w*i + j] - image[w*(i-1) + (j-1)]) <= 10) && !(components[w*(i-1) + (j-1)]))
+            DFS(i-1, j-1, w, h, image, components, adj_num);
+    if (exists(i-1, j+1, w, h))
+        if ((fabs(image[w*i + j] - image[w*(i-1) + (j+1)]) <= 10) && !(components[w*(i-1) + (j+1)]))
+            DFS(i-1, j+1, w, h, image, components, adj_num);
+    if (exists(i+1, j, w, h))
+        if ((fabs(image[w*i + j] - image[w*(i+1) + j]) <= 10) && !(components[w*(i+1) + j]))
+            DFS(i+1, j, w, h, image, components, adj_num);
+    if (exists(i+1, j-1, w, h))
+        if ((fabs(image[w*i + j] - image[w*(i+1) + (j-1)]) <= 10) && !(components[w*(i+1) + (j-1)]))
+            DFS(i+1, j-1, w, h, image, components, adj_num);
+    if (exists(i+1, j+1, w, h))
+        if ((fabs(image[w*i + j] - image[w*(i+1) + (j+1)]) <= 10) && !(components[w*(i+1) + (j+1)]))
+            DFS(i+1, j+1, w, h, image, components, adj_num);
+    return;
+}
+
+/* void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num)
+{
+    components[w*i + j] = adj_num;
     if (exists(i, j-2, w, h))
         if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 10) && !(components[w*i + (j-2)]))
             DFS(i, j-2, w, h, image, components, adj_num);
@@ -109,7 +139,7 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
             DFS(i+2, j+1, w, h, image, components, adj_num);
 
     return;
-}
+}*/
 
 
 int main() {
