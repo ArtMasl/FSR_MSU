@@ -169,8 +169,8 @@ int main() {
     fSobel(image, image_0, w, h);
     fGauss(image_0, image_2, w, h);
     fSobel(image_2, image_4, w, h);
-    fSobel(image_4, image_1, w, h);
-    //fSobel(image_5, image_1, w, h);
+    fSobel(image_4, image_5, w, h);
+    fSobel(image_5, image_1, w, h);
     colouring(image_1, data, w, h, n);
   /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
