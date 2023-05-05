@@ -163,14 +163,17 @@ int main() {
     char* image_3 = (char*)malloc(w*h*sizeof(char));
     char* image_4 = (char*)malloc(w*h*sizeof(char));
     char* image_5 = (char*)malloc(w*h*sizeof(char));
+    char* image_6 = (char*)malloc(w*h*sizeof(char));
     char* data = (char*)malloc(n*w*h*sizeof(char));
 
     preparation(image, w, h);
     Sobel(image, image_0, w, h);
     Sobel(image_0, image_2, w, h);
-    Gauss(image_2, image_4, w, h);
+    Sobel(image_2, image_3, w, h);
+    Gauss(image_3, image_4, w, h);
     Sobel(image_4, image_5, w, h);
-    Sobel(image_5, image_1, w, h);
+    Sobel(image_5, image_6, w, h);
+    Sobel(image_6, image_1, w, h);
     colouring(image_1, data, w, h, n);
   /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
