@@ -41,8 +41,8 @@ void preparation(char * od, int w, int h){
     for (i=0; i<h; i++)
            for (j=0; j<w; j++) {
                 if (od[w*i + j]<100) od[w*i + j]=0;
-		else od[w*i + j]=255;
-                //if (od[w*i + j]>168) od[w*i + j]=255;
+		//else od[w*i + j]=255;
+                if (od[w*i + j]>168) od[w*i + j]=255;
            }
     return;
 }
