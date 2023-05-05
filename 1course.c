@@ -168,13 +168,13 @@ int main() {
     char* data = (char*)malloc(n*w*h*sizeof(char));
 
     Sobel(image, image_0, w, h);
-    Gauss(image_0, image_2, w, h);
-    Sobel(image_2, image_3, w, h);
+    Sobel(image_0, image_2, w, h);
+    Gauss(image_2, image_3, w, h);
     Sobel(image_3, image_1, w, h);
     preparation(image_1, w, h);
     colouring(image_1, data, w, h, n);
   /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
-    for (i=0; i < w*h; i++) comps[i] = 0;
+    for (i=0; i < n*w*h; i++) comps[i] = 0;
 
     for (i = 2; i < h-1; i++)
         for (j = 2; j < w-1; j++)
@@ -198,5 +198,4 @@ int main() {
     writePng(new_image, data, w, h);
 
     return 0;
-}
-                                                               
+}                                         
