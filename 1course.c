@@ -42,7 +42,7 @@ void preparation(char * od, int w, int h){
            for (j=0; j<w; j++) {
                 if (od[w*i + j]<100) od[w*i + j]=0;
 		else if (od[w*i + j]>168) od[w*i + j]=255;
-		else od[w*i + j]=128;
+	//	else od[w*i + j]=128;
            }
     return;
 }
@@ -161,7 +161,7 @@ int main() {
     char* image_0 = (char*)malloc(w*h*sizeof(char));
     char* image_1 = (char*)malloc(w*h*sizeof(char));
     char* image_2 = (char*)malloc(w*h*sizeof(char));
-    //char* image_3 = (char*)malloc(w*h*sizeof(char));
+    char* image_3 = (char*)malloc(w*h*sizeof(char));
     //char* image_4 = (char*)malloc(w*h*sizeof(char));
    // char* image_5 = (char*)malloc(w*h*sizeof(char));
    // char* image_6 = (char*)malloc(w*h*sizeof(char));
@@ -169,8 +169,9 @@ int main() {
 
     Sobel(image, image_0, w, h);
     Gauss(image_0, image_2, w, h);
-    Sobel(image_2, image_1, w, h);
-    preparation(image_1, w, h);
+    Sobel(image_2, image_3, w, h);
+    preparation(image_3, w, h);
+    Sobel(image_3, image_1, w, h);
     colouring(image_1, data, w, h, n);
   /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < w*h; i++) comps[i] = 0;
