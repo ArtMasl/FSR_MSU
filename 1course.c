@@ -196,4 +196,4 @@ int main() {
     writePng(new_image, data, w, h);
 
     return 0;
-}                      
+}                                         
