@@ -53,9 +53,9 @@ void Gauss(unsigned char *omat, unsigned char *d, int h, int w){
  
 void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){ 
     for(i=1;i<w*h;i++) { 
-        mpicture[i*4]=87+dmat[i]+0.5*dmat[i-1]; 
-        mpicture[i*4+1]=100+dmat[i]; 
-        mpicture[i*4+2]=10+dmat[i]; 
+        mpicture[i*4]=80+dmat[i]+0.5*dmat[i-1]; 
+        mpicture[i*4+1]=45+dmat[i]; 
+        mpicture[i*4+2]=150+dmat[i]; 
         mpicture[i*4+3]=255; 
     } 
     return; 
