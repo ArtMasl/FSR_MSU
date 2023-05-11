@@ -41,7 +41,7 @@ void preparation(char * od, int w, int h){
     for (i=0; i<h; i++)
            for (j=0; j<w; j++) {
                 if (od[w*i + j]<65) od[w*i + j]=0;
-		else if (od[w*i + j]>168) od[w*i + j]=255;
+		else if (od[w*i + j]>187) od[w*i + j]=255;
 	//	else od[w*i + j]=128;
            }
     return;
@@ -89,7 +89,7 @@ int exists(int i,int j,int width,int height){
     return 0;
 }
 
-void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num)
+/*void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num)
 {
     components[w*i + j] = adj_num;
     if (exists(i, j-1, w, h))
@@ -117,10 +117,9 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
         if ((fabs(image[w*i + j] - image[w*(i+1) + (j+1)]) <= 10) && !(components[w*(i+1) + (j+1)]))
             DFS(i+1, j+1, w, h, image, components, adj_num);
     return;
-}
+}*/
 
-/* void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num)
-{
+void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_num) {
     components[w*i + j] = adj_num;
     if (exists(i, j-2, w, h))
         if ((fabs(image[w*i + j] - image[w*i + (j-2)]) <= 10) && !(components[w*i + (j-2)]))
@@ -138,7 +137,7 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
             DFS(i+2, j+1, w, h, image, components, adj_num);
 
     return;
-}*/
+}
 
 
 int main() {
@@ -169,11 +168,10 @@ int main() {
 
     preparation(image, w, h);
     //Sobel(image, image_0, w, h);
-   // Sobel(image_0, image_2, w, h);
     Gauss(image, image_1, w, h);
-   // Sobel(image_3, image_1, w, h);
+    //Sobel(image_2, image_1, w, h);
     colouring(image_1, data, w, h, n);
-  /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
+    /*int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < n*w*h; i++) comps[i] = 0;
 
     for (i = 2; i < h-1; i++)
