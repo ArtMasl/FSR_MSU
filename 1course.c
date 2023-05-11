@@ -167,9 +167,9 @@ int main() {
     unsigned char* data = (unsigned char*)malloc(n*w*h*sizeof(unsigned char));
 
     preparation(image, w, h);
-   // Sobel(image, image_0, w, h);
-    Gauss(image, image_0, w, h);
-    Sobel(image_0, image_1, w, h);
+    Sobel(image, image_1, w, h);
+    //Gauss(image, image_0, w, h);
+    //Sobel(image_0, image_1, w, h);
     colouring(image_1, data, w, h, n);
     /*int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < n*w*h; i++) comps[i] = 0;
