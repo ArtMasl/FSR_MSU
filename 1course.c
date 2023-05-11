@@ -65,36 +65,30 @@ void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){
 int main() { 
  
     char * filename = "scull.png"; 
-    int w, h; 
-    int k=0; 
+    int w, h, i, k=0, n=4;
     char * picture = loadPng(filename, &w, &h); 
     if (picture == NULL){ 
         printf("I can not read the picture from the file %s. Error.\n", filename); 
         return -1; 
     } 
  
- 
-    unsigned char *opicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *dpicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *mpicture=(unsigned char*)malloc(h*w*4*sizeof(unsigned char)); 
- 
-    for(i=0;i<h*w*4;i=i+4){ 
- 
-         opicture[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
+    char* image = (char*)malloc(w*h*sizeof(char)); 
+
+    for(i=0;i<h*w*n;i+=n){ 
+ 	image[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
          k++; 
     } 
  
-    pre(opicture, h, w); 
-    Gauss(opicture, dpicture, h, w); 
-    color(dpicture, mpicture, h, w); 
+    char* image_1 = (char*)malloc(w*h*sizeof(char));
+    char* data = (char*)malloc(w*h*sizeof(char));
+
+    pre(image, h, w); 
+    Gauss(image, image_1, h, w); 
+    color(image_1, data, h, w); 
    
-     
- 
-    char * new_image = "skull-modified.png"; 
-    writePng(new_image, mpicture, w, h); 
-    free(opicture); 
-    free(dpicture); 
-    free(mpicture); 
-    free(picture); 
+    //char * new_image = "hamster-modified.png";
+    char * new_image = "esm.png"; 
+    writePng(new_image, data, w, h); 
+
     return 0; 
 }
