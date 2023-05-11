@@ -29,7 +29,7 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
   free(png); 
 } 
  
-void pre(unsigned char *omat, int h, int w){ 
+void pre(char *omat, int h, int w){ 
     for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             if(omat[w*i+j]<65) 
@@ -40,7 +40,8 @@ void pre(unsigned char *omat, int h, int w){
     return; 
 } 
  
-void Gauss(unsigned char *omat, unsigned char *d, int h, int w){ 
+void Gauss(char *omat, char *d, int h, int w){
+     int i, j;	
      for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             d[w*i+j]=0.12*omat[w*i+j]+0.12*omat[w*(i+1)+j]+0.12*omat[w*(i-1)+j]; 
@@ -51,7 +52,8 @@ void Gauss(unsigned char *omat, unsigned char *d, int h, int w){
    return; 
 } 
  
-void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){ 
+void color(char *dmat, char *mpicture, int h, int w){
+    int i;	
     for(i=1;i<w*h;i++) { 
         mpicture[i*4]=87+dmat[i]+0.5*dmat[i-1]; 
         mpicture[i*4+1]=100+dmat[i]; 
@@ -65,36 +67,28 @@ void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){
 int main() { 
  
     char * filename = "scull.png"; 
-    int w, h; 
-    int k=0; 
+    int w, h, i, k=0;
     char * picture = loadPng(filename, &w, &h); 
     if (picture == NULL){ 
         printf("I can not read the picture from the file %s. Error.\n", filename); 
         return -1; 
     } 
  
- 
-    unsigned char *opicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *dpicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *mpicture=(unsigned char*)malloc(h*w*4*sizeof(unsigned char)); 
- 
+    char* image = (char*)malloc(w*h*sizeof(char)); 
+  
     for(i=0;i<h*w*4;i=i+4){ 
- 
-         opicture[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
+ 	image[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
          k++; 
     } 
  
-    pre(opicture, h, w); 
-    Gauss(opicture, dpicture, h, w); 
-    color(dpicture, mpicture, h, w); 
+    char* image_1 = (char*)malloc(w*h*sizeof(char));
+    char* data  = (char*)malloc(w*h*sizeof(char));
+
+    pre(image, h, w); 
+    Gauss(image, image_1, h, w); 
+    color(image_1, data, h, w); 
    
-     
- 
     char * new_image = "esm.png"; 
-    writePng(new_image, mpicture, w, h); 
-    free(opicture); 
-    free(dpicture); 
-    free(mpicture); 
-    free(picture); 
+    writePng(new_image, data, w, h); 
     return 0; 
 }
