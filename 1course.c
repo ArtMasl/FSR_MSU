@@ -87,7 +87,7 @@ int main() {
     unsigned char *image=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
     unsigned char *image_1=(unsigned char*)malloc(h*w*sizeof(unsigned char));
     unsigned char *image_2=(unsigned char*)malloc(h*w*sizeof(unsigned char));
-    unsigned char *image_3=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
+    //unsigned char *image_3=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
     unsigned char *data=(unsigned char*)malloc(h*w*4*sizeof(unsigned char)); 
  
     for(i=0;i<h*w*4;i=i+4){ 
@@ -97,10 +97,9 @@ int main() {
     } 
  
     pre(image, w, h); 
-    Sobel(image, image_1, w, h);
-    Gauss(image_1, image_2, w, h);
-    Sobel(image_2, image_3, w, h); 
-    color(image_3, data, w, h); 
+    Gauss(image, image_1, w, h);
+    Gauss(image_1, image_2, w, h); 
+    color(image_2, data, w, h); 
    
      
  
