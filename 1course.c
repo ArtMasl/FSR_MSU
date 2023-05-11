@@ -27,7 +27,7 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
   free(png); 
 } 
  
-void pre(unsigned char *omat, int h, int w){ 
+void preparation(unsigned char *omat, int w, int h){ 
     int i, j;
     for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
@@ -39,7 +39,7 @@ void pre(unsigned char *omat, int h, int w){
     return; 
 } 
  
-void Gauss(unsigned char *omat, unsigned char *d, int h, int w){     int i, j; 
+void Gauss(unsigned char *omat, unsigned char *d, int w, int h){     int i, j; 
      for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             d[w*i+j]=0.12*omat[w*i+j]+0.12*omat[w*(i+1)+j]+0.12*omat[w*(i-1)+j]; 
@@ -50,7 +50,7 @@ void Gauss(unsigned char *omat, unsigned char *d, int h, int w){     int i, j;
    return; 
 } 
  
-void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){
+void colouring(unsigned char *dmat, unsigned char *mpicture, int w, int h){
     int i;	
     for(i=1;i<w*h;i++) { 
         mpicture[i*4]=87+dmat[i]+0.5*dmat[i-1]; 
@@ -82,9 +82,9 @@ int main() {
     unsigned char* image_1 = (unsigned char*)malloc(h*w*sizeof(unsigned char));
     unsigned char* data = (unsigned char*)malloc(n*h*w*sizeof(unsigned char));
 
-    pre(image, h, w); 
-    Gauss(image, image_1, h, w); 
-    color(image_1, data, h, w); 
+    preparation(image, w, h); 
+    Gauss(image, image_1, w, h); 
+    colouring(image_1, data, w, h); 
    
     char* new_image = "esm.png"; 
     writePng(new_image, data, w, h);  
