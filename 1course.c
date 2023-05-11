@@ -38,8 +38,8 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
 
 void preparation(char * od, int w, int h){
     int i, j;
-    for (i=0; i<h; i++)
-           for (j=0; j<w; j++) {
+    for (i=2; i<h; i++)
+           for (j=2; j<w; j++) {
                 if (od[w*i + j]<65) od[w*i + j]=0;
 		else if (od[w*i + j]>187) od[w*i + j]=255;
 	//	else od[w*i + j]=128;
@@ -75,10 +75,10 @@ void Gauss(char * od, char * dc, int w, int h){
 void colouring(char * dc, char * mcod, int w, int h, int n){
         int i;
         for (i=1; i<w*h; i++) {
-                mcod[i*n]=80+dc[i]+0.5*dc[i-1];
-                mcod[i*n+1]=45+dc[i];
-                mcod[i*n+2]=150+dc[i];
-                mcod[i*n+3]=225;
+                mcod[i*n]=87+dc[i]+0.5*dc[i-1];
+                mcod[i*n+1]=100+dc[i];
+                mcod[i*n+2]=10+dc[i];
+                mcod[i*n+3]=120;
         }
         return;
 }
@@ -157,10 +157,10 @@ int main() {
         image[k] = 0.299*picture[i] + 0.578*picture[i+1] + 0.114*picture[i+2];
         k++;
     }
-    char* image_0 = (char*)malloc(w*h*sizeof(char));
+    //char* image_0 = (char*)malloc(w*h*sizeof(char));
     char* image_1 = (char*)malloc(w*h*sizeof(char));
-    char* image_2 = (char*)malloc(w*h*sizeof(char));
-    char* image_3 = (char*)malloc(w*h*sizeof(char));
+    //char* image_2 = (char*)malloc(w*h*sizeof(char));
+    //char* image_3 = (char*)malloc(w*h*sizeof(char));
     //char* image_4 = (char*)malloc(w*h*sizeof(char));
    // char* image_5 = (char*)malloc(w*h*sizeof(char));
    // char* image_6 = (char*)malloc(w*h*sizeof(char));
