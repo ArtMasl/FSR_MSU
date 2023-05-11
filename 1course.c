@@ -40,7 +40,7 @@ void preparation(char * od, int w, int h){
     int i, j;
     for (i=0; i<h; i++)
            for (j=0; j<w; j++) {
-                if (od[w*i + j]<100) od[w*i + j]=0;
+                if (od[w*i + j]<65) od[w*i + j]=0;
 		else if (od[w*i + j]>168) od[w*i + j]=255;
 	//	else od[w*i + j]=128;
            }
@@ -144,7 +144,7 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 int main() {
 
     //char * filename = "hamster.png";
-    char * filename = "Scull.png";
+    char * filename = "scull.png";
     int w, h, i, j, k=0, adj_num=0, n=4;
     char * picture = loadPng(filename, &w, &h);
     if (picture == NULL){
@@ -167,11 +167,11 @@ int main() {
    // char* image_6 = (char*)malloc(w*h*sizeof(char));
     char* data = (char*)malloc(n*w*h*sizeof(char));
 
-    Sobel(image, image_0, w, h);
-    Sobel(image_0, image_2, w, h);
-    Gauss(image_2, image_3, w, h);
-    Sobel(image_3, image_1, w, h);
-    preparation(image_1, w, h);
+    preparation(image, w, h);
+    //Sobel(image, image_0, w, h);
+   // Sobel(image_0, image_2, w, h);
+    Gauss(image, image_1, w, h);
+   // Sobel(image_3, image_1, w, h);
     colouring(image_1, data, w, h, n);
   /*  int* comps = (int*)malloc((n*w*h)*sizeof(int));
     for (i=0; i < n*w*h; i++) comps[i] = 0;
