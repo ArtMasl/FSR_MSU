@@ -27,7 +27,7 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
   free(png); 
 } 
  
-void pre(char *omat, int h, int w){ 
+void pre(unsigned char *omat, int h, int w){ 
     int i, j;
     for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
@@ -39,8 +39,7 @@ void pre(char *omat, int h, int w){
     return; 
 } 
  
-void Gauss(char *omat, char *d, int h, int w){     
-     int i, j; 
+void Gauss(unsigned char *omat, unsigned char *d, int h, int w){     int i, j; 
      for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             d[w*i+j]=0.12*omat[w*i+j]+0.12*omat[w*(i+1)+j]+0.12*omat[w*(i-1)+j]; 
@@ -51,7 +50,7 @@ void Gauss(char *omat, char *d, int h, int w){
    return; 
 } 
  
-void color(char *dmat, char *mpicture, int h, int w){
+void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){
     int i;	
     for(i=1;i<w*h;i++) { 
         mpicture[i*4]=87+dmat[i]+0.5*dmat[i-1]; 
@@ -73,15 +72,15 @@ int main() {
         return -1; 
     } 
  
-    char* image = (char*)malloc(h*w*sizeof(char)); 
+    unsigned char* image = (unsigned char*)malloc(h*w*sizeof(unsigned char)); 
     
     for(i=0;i<n*h*w;i+=n){ 
  	image[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
          k++; 
     } 
 
-    char* image_1 = (char*)malloc(h*w*sizeof(char));
-    char* data = (char*)malloc(n*h*w*sizeof(char));
+    unsigned char* image_1 = (unsigned char*)malloc(h*w*sizeof(unsigned char));
+    unsigned char* data = (char*)malloc(n*h*w*sizeof(char));
 
     pre(image, h, w); 
     Gauss(image, image_1, h, w); 
