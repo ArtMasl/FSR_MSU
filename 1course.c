@@ -72,28 +72,21 @@ int main() {
         return -1; 
     } 
  
- 
-    unsigned char *opicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *dpicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *mpicture=(unsigned char*)malloc(h*w*4*sizeof(unsigned char)); 
- 
+    unsigned char* image = (unsigned char*)malloc(h*w*sizeof(unsigned char)); 
+    
     for(i=0;i<h*w*4;i=i+4){ 
- 
-         opicture[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
+ 	image[k]=0.299*picture[i]+0.587*picture[i+1]+0.114*picture[i+2]; 
          k++; 
     } 
- 
-    pre(opicture, h, w); 
-    Gauss(opicture, dpicture, h, w); 
-    color(dpicture, mpicture, h, w); 
+
+    unsigned char* image_1 = (unsigned char*)malloc(h*w*sizeof(unsigned char));
+ unsigned char* data = (unsigned char*)malloc(h*w*sizeof(unsigned char));
+
+    pre(image, h, w); 
+    Gauss(image, image_1, h, w); 
+    color(image_1, data, h, w); 
    
-     
- 
-    char * new_image = "skull-modified.png"; 
-    writePng(new_image, mpicture, w, h); 
-    free(opicture); 
-    free(dpicture); 
-    free(mpicture); 
-    free(picture); 
+    char * new_image = "esm.png"; 
+    writePng(new_image, data, w, h);  
     return 0; 
 }
