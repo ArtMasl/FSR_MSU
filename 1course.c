@@ -29,7 +29,7 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
   free(png); 
 } 
  
-void pre(unsigned char *omat, int h, int w){ 
+void pre(unsigned char *omat, int w, int h){ 
     for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             if(omat[w*i+j]<65) 
@@ -40,7 +40,7 @@ void pre(unsigned char *omat, int h, int w){
     return; 
 } 
  
-void Gauss(unsigned char *omat, unsigned char *d, int h, int w){ 
+void Gauss(unsigned char *omat, unsigned char *d, int w, int h){ 
      for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             d[w*i+j]=0.12*omat[w*i+j]+0.12*omat[w*(i+1)+j]+0.12*omat[w*(i-1)+j]; 
@@ -61,7 +61,7 @@ void Sobel(char * od, char * dc, int w, int h){
         return;
 }
  
-void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){ 
+void color(unsigned char *dmat, unsigned char *mpicture, int w, int h){ 
     for(i=1;i<w*h;i++) { 
         mpicture[i*4]=87+dmat[i]+0.5*dmat[i-1]; 
         mpicture[i*4+1]=100+dmat[i]; 
@@ -86,7 +86,8 @@ int main() {
  
     unsigned char *image=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
     unsigned char *image_1=(unsigned char*)malloc(h*w*sizeof(unsigned char));
-    unsigned char *image_2=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
+    unsigned char *image_2=(unsigned char*)malloc(h*w*sizeof(unsigned char));
+    unsigned char *image_3=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
     unsigned char *data=(unsigned char*)malloc(h*w*4*sizeof(unsigned char)); 
  
     for(i=0;i<h*w*4;i=i+4){ 
@@ -95,10 +96,11 @@ int main() {
          k++; 
     } 
  
-    pre(image, h, w); 
+    pre(image, w, h); 
     Sobel(image, image_1, w, h);
-    Gauss(image_1, image_2, h, w); 
-    color(image_2, data, h, w); 
+    Gauss(image_1, image_2, w, h);
+    Sobel(image_2, image_3, w, h); 
+    color(image_3, data, w, h); 
    
      
  
