@@ -32,9 +32,9 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
 void pre(unsigned char *omat, int h, int w){ 
     for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
-            if(omat[w*i+j]<65) 
+            if(omat[w*i+j]<100) 
                 omat[w*i+j]=0; 
-            if(omat[w*i+j]>187) 
+            if(omat[w*i+j]>168) 
                 omat[w*i+j]=255; 
         } 
     return; 
