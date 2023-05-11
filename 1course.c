@@ -56,7 +56,7 @@ void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){
         mpicture[i*4]=87+dmat[i]+0.5*dmat[i-1]; 
         mpicture[i*4+1]=100+dmat[i]; 
         mpicture[i*4+2]=10+dmat[i]; 
-        mpicture[i*4+3]=120; 
+        mpicture[i*4+3]=255; 
     } 
     return; 
 } 
