@@ -96,8 +96,8 @@ int main() {
     } 
  
     pre(image, h, w); 
-    Gauss(image, image_1, h, w);
-    Sobel(image_1, image_2, w, h); 
+    Sobel(image, image_1, w, h);
+    Gauss(image_1, image_2, h, w); 
     color(image_2, data, h, w); 
    
      
