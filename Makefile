@@ -1,8 +1,8 @@
-all: lodepng.o 1course.o
-	gcc -o analyzer.exe lodepng.o 1course.o -lm
+all: lodepng.o paint_scull.o
+	gcc -o analyzer.exe lodepng.o paint_scull.o -lm
 lodepng.o: lodepng.h lodepng.c
 	gcc -c lodepng.c
-1course.o: 1course.c
-	gcc -c 1course.c
+paint_scull.o: paint_scull.c
+	gcc -c paint_scull.c
 clean:
 	rm *.o analyzer.exe
