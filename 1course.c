@@ -80,13 +80,13 @@ int main() {
     } 
 
     unsigned char* image_1 = (unsigned char*)malloc(h*w*sizeof(unsigned char));
- unsigned char* data = (unsigned char*)malloc(h*w*sizeof(unsigned char));
+ unsigned char* data = (unsigned char*)malloc(4*h*w*sizeof(unsigned char));
 
     pre(image, h, w); 
     Gauss(image, image_1, h, w); 
     color(image_1, data, h, w); 
    
-    char * new_image = "esm.png"; 
+    char* new_image = "esm.png"; 
     writePng(new_image, data, w, h);  
     return 0; 
 }
