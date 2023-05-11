@@ -80,7 +80,7 @@ int main() {
     } 
 
     unsigned char* image_1 = (unsigned char*)malloc(h*w*sizeof(unsigned char));
-    unsigned char* data = (char*)malloc(n*h*w*sizeof(char));
+    unsigned char* data = (unsigned char*)malloc(n*h*w*sizeof(unsigned char));
 
     pre(image, h, w); 
     Gauss(image, image_1, h, w); 
