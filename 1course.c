@@ -1,9 +1,9 @@
-#include <stdlib.h> 
-#include <stdio.h> 
-#include <math.h> 
-#include "lodepng.h" 
- 
-int i, j; 
+#include <stdio.h>
+#include <stdlib.h>  
+#include <math.h>  
+#include "lodepng.h"
+
+int i, j;
  
 char* loadPng(const char* filename, int* width, int* height) { 
    
@@ -29,7 +29,7 @@ void writePng(const char* filename, const unsigned char* image, unsigned width, 
   free(png); 
 } 
  
-void pre(unsigned char *omat, int h, int w){ 
+void pre(char *omat, int h, int w){ 
     for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             if(omat[w*i+j]<100) 
@@ -40,7 +40,7 @@ void pre(unsigned char *omat, int h, int w){
     return; 
 } 
  
-void Gauss(unsigned char *omat, unsigned char *d, int h, int w){ 
+void Gauss(char *omat, char *d, int h, int w){ 
      for(i=2;i<h-1;i++) 
         for(j=2;j<w-1;j++){ 
             d[w*i+j]=0.12*omat[w*i+j]+0.12*omat[w*(i+1)+j]+0.12*omat[w*(i-1)+j]; 
@@ -51,7 +51,7 @@ void Gauss(unsigned char *omat, unsigned char *d, int h, int w){
    return; 
 } 
  
-void color(unsigned char *dmat, unsigned char *mpicture, int h, int w){ 
+void color(char *dmat, char *mpicture, int h, int w){ 
     for(i=1;i<w*h;i++) { 
         mpicture[i*4]=80+dmat[i]+0.5*dmat[i-1]; 
         mpicture[i*4+1]=45+dmat[i]; 
@@ -74,9 +74,9 @@ int main() {
     } 
  
  
-    unsigned char *opicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *dpicture=(unsigned char*)malloc(h*w*sizeof(unsigned char)); 
-    unsigned char *mpicture=(unsigned char*)malloc(h*w*4*sizeof(unsigned char)); 
+    char *opicture=(char*)malloc(h*w*sizeof(char)); 
+    char *dpicture=(char*)malloc(h*w*sizeof(char)); 
+    char *mpicture=(char*)malloc(h*w*4*sizeof(char)); 
  
     for(i=0;i<h*w*4;i=i+4){ 
  
