@@ -142,8 +142,8 @@ void DFS(int i,int j,int w,int h,unsigned char* image, int* components,int adj_n
 
 int main() {
 
-    //char * filename = "hamster.png";
-    char * filename = "scull.png";
+    char * filename = "KOR_ver_1.png";
+    //char * filename = "scull.png";
     int w, h, i, j, k=0, adj_num=0, n=4;
     char * picture = loadPng(filename, &w, &h);
     if (picture == NULL){
@@ -191,8 +191,8 @@ int main() {
         k++;
 	}*/ 
 
-    //char * new_image = "hamster-modified.png";
-    char * new_image = "SCULL-MODIFIED.png";
+    char * new_image = "hamster-modified.png";
+    //char * new_image = "KOR_ver_1.png";
     writePng(new_image, data, w, h);
 
     return 0;
