@@ -1,11 +1,10 @@
-﻿// TSP, genetic algorithm or ant optimization
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include "tspSolver.h"
+#include "Solver.h"
 
 
 #define POP_SIZE 1
@@ -20,13 +19,8 @@ int main() {
 	ifstream File;
 
 	string name;
-	cout << "Enter file number:\n(for example: 1000_1)\n";
 	cin >> name;
-	if (name == "1000_1") cout << "wait long please\n";
-
-
-
-	File.open("./data/tsp_" + name);
+	File.open("tsp_" + name);
 	int n;
 	File >> s1;
 	istringstream os(s1);
