@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include "tspSolver.h"
+#include "Solver.h"
 
 
 #define POP_SIZE 1
