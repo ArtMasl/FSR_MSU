@@ -1,3 +1,5 @@
+#include <climits>
+
 #define MAX_GEN 1e4
 #define MAX_POP 5
 #define MAX_CNT 100

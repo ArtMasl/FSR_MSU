@@ -21,7 +21,7 @@ int main() {
 	cout<<"Insert filename (such as 70_1):"<<endl;
 	cin>>filename;
 
-	f_in.open("tsp_" + filename);
+	f_in.open("./data/tsp_" + filename);
 	f_in >> s1;
 	istringstream os(s1);
 	os >> n;
