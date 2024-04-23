@@ -2,6 +2,6 @@ all:
         g++ -c main.cpp
         g++ main.o -o result
 clean:
-        rm *.o result
+        rm *.o knapsack
 workresult:
-        ./result
+        ./knapsack
