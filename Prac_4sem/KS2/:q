@@ -1,6 +1,0 @@
-all: 
-	g++ -c main.cpp
-	g++ main.o -o knapsack
-clean:
-	rm *.o knapsack
-

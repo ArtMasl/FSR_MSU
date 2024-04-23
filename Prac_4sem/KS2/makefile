@@ -3,4 +3,4 @@ all:
 	g++ main.o -o knapsack
 clean:
 	rm *.o knapsack
-
+	rm result.txt
