@@ -1,7 +1,5 @@
 all: 
         g++ -c main.cpp
-        g++ main.o -o result
+        g++ main.o -o knapsack
 clean:
         rm *.o knapsack
-workresult:
-        ./knapsack
