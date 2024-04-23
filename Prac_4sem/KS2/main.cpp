@@ -10,7 +10,9 @@ int main() {
         //ifstream in(files[file]);
         ifstream in;
         in.open(files[file]);
-        ofstream out("result_" + files[file] + ".txt");
+        //ofstream out("result_" + files[file] + ".txt");
+        ofstream out;
+        out.open("result_" + files[file] + ".txt");
         int K, n, val, wt;
         //creation of given list of items
         vector<item> items; 
