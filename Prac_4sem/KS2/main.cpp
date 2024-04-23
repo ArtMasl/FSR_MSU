@@ -27,5 +27,4 @@ int main() {
         fill_result(total_profit, out, files[file], used);
         in.close();
     }
-    out.close();
 }
