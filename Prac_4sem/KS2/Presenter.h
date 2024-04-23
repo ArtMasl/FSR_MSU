@@ -1,6 +1,7 @@
 #include "Solver.h"
 #include<filesystem>
 #include<fstream>
+#include<sstream>
 namespace  fs = std::filesystem;
 using namespace std;
 
