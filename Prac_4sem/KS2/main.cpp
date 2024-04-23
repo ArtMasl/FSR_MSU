@@ -26,6 +26,6 @@ int main() {
         show1d_matrix<int>(initial_order);*/
         fill_result(total_profit, out, files[file], used);
         in.close();
-        out.close();
-    }  
+    }
+    out.close();
 }
