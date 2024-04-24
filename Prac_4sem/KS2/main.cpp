@@ -6,7 +6,7 @@ int main() {
     fs::path dir{ "data" };
     fs::path pathtodata = cur_p / dir;
     files = filesindir(pathtodata);
-    ofstream out("result.txt");
+    //ofstream out("result.txt");
     for (int file = 0; file < files.size(); file++) {
         ifstream in(files[file]);
         int K, n, val, wt;
@@ -24,8 +24,11 @@ int main() {
         //cout << total_profit << endl;
         vector<int> initial_order = initial_element_order(used, n, items, sorted_items);// uncommenting will reveal the used items for filling knapsack
         //show1d_matrix<int>(initial_order);
-        fill_result(total_profit, out, files[file], initial_order);
+	files[file].erase(0, 33);
+	ofstream out("result_" + files[file] + ".txt");
+        fill_result(total_profit, out, initial_order);
         in.close();
+	out.close();
     }
-    out.close();  
+    //out.close();  
 }

@@ -15,8 +15,7 @@ vector<string> filesindir(const fs::path& dir) {
 	return files;
 }
 //function to fill results
-void fill_result(int& wt, ofstream& out,string& file_name, vector<int>& used_correct_order) {
-	out << file_name << '\n';
+void fill_result(int& wt, ofstream& out, vector<int>& used_correct_order) {
 	out << wt << " " << 0 << '\n';
 	for (int i=0; i<used_correct_order.size(); i++)
 		out << used_correct_order[i] << " ";
