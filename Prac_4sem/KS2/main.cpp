@@ -3,17 +3,17 @@
 int main() {
     vector<string> files;
     auto cur_p = fs::current_path();
-    fs::path dir{ "data" };
+    fs::path dir{"data"};
     fs::path pathtodata = cur_p / dir;
     files = filesindir(pathtodata);
-    for (int file = 0; file < files.size(); file++) {
+    for (int file = 0; file < sz(files); file++) {
         ifstream in(files[file]);
         int K, n, val, wt;
         vector<item> items; 
         in >> n >> K;
         for (int i = 0; i < n; i++) {
             in >> val >> wt;
-            item a = { val,wt };
+            item a = {val, wt};
             items.push_back(a);
         }
         vector<int> used(n, 0);
