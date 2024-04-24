@@ -24,7 +24,7 @@ int main() {
         cout << total_profit << endl;
         /*vector<int> initial_order = initial_element_order(used, n, items, sorted_items);// uncommenting will reveal the used items for filling knapsack
         show1d_matrix<int>(initial_order);*/
-        fill_result(total_profit, out, files[file]);
+        fill_result(total_profit, out, files[file], used);
         in.close();
     }
     out.close();  
