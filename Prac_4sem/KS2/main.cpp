@@ -22,9 +22,9 @@ int main() {
         vector<item> sorted_items = sort_vector(items);
         int total_profit = knapsack(sorted_items, used, n, K);
         cout << total_profit << endl;
-        /*vector<int> initial_order = initial_element_order(used, n, items, sorted_items);// uncommenting will reveal the used items for filling knapsack
-        show1d_matrix<int>(initial_order);*/
-        fill_result(total_profit, out, files[file], used);
+        vector<int> initial_order = initial_element_order(used, n, items, sorted_items);// uncommenting will reveal the used items for filling knapsack
+        //show1d_matrix<int>(initial_order);
+        fill_result(total_profit, out, files[file], initial_order);
         in.close();
     }
     out.close();  
