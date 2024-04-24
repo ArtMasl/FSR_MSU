@@ -12,7 +12,7 @@ int main() {
         //ifstream in;
         //in.open(files[file]);
         //ofstream out("result_" + files[file] + ".txt");
-        ofstream out;
+        //ofstream out;
         //out.open("result_" + files[file] + ".txt");
         int K, n, val, wt;
         //creation of given list of items
