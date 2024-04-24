@@ -6,13 +6,14 @@ int main() {
     fs::path dir{ "data" };
     fs::path pathtodata = cur_p / dir;
     files = filesindir(pathtodata);
+    ofstream out("result.txt");
     for (int file = 0; file < files.size(); file++) {
-        //ifstream in(files[file]);
-        ifstream in;
-        in.open(files[file]);
+        ifstream in(files[file]);
+        //ifstream in;
+        //in.open(files[file]);
         //ofstream out("result_" + files[file] + ".txt");
         ofstream out;
-        out.open("result_" + files[file] + ".txt");
+        //out.open("result_" + files[file] + ".txt");
         int K, n, val, wt;
         //creation of given list of items
         vector<item> items; 
@@ -30,6 +31,6 @@ int main() {
         show1d_matrix<int>(initial_order);*/
         fill_result(total_profit, out, files[file], used);
         in.close();
-        out.close();
     }
+    out.close();
 }
